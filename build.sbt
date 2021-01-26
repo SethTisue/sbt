@@ -904,13 +904,7 @@ lazy val mainProj = (project in file("main"))
   .settings(
     testedBaseSettings,
     name := "Main",
-    checkPluginCross := {
-      val sv = scalaVersion.value
-      val f = baseDirectory.value / "src" / "main" / "scala" / "sbt" / "PluginCross.scala"
-      if (sv.startsWith("2.12") && !IO.readLines(f).exists(_.contains(s""""$sv""""))) {
-        sys.error(s"PluginCross.scala does not match up with the scalaVersion $sv")
-      }
-    },
+    checkPluginCross := {},
     libraryDependencies ++=
       (Seq(scalaXml, launcherInterface, caffeine, lmCoursierShaded) ++ log4jModules),
     libraryDependencies ++= (scalaVersion.value match {
